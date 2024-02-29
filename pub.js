@@ -6,6 +6,6 @@ const commitMessage = argv.m || "updates";
 
 // Run the git commit command with the specified commit message
 execSync(
-    `git add . && git commit -m "${commitMessage}" && git push origin main && npm version patch && npm run build && npm publish`,
+    `git add . && git commit -m "${commitMessage}"  && npm version patch && npm run build && npm publish && git push`,
     { stdio: "inherit" }
 );
