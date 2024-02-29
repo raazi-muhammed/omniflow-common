@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import adaptRequest from "./adapt-request.js";
+import { adaptRequest } from "./adapt-request.js";
 import { IResponse } from "../interfaces/response.interface.js";
 
 export default function makeCallback(controller: Function) {

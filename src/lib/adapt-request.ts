@@ -1,6 +1,6 @@
 import { Request } from "express";
 
-export default function adaptRequest(req: Request) {
+export function adaptRequest(req: Request) {
     return Object.freeze({
         path: req.path,
         method: req.method,
