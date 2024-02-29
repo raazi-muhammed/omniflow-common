@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { adaptRequest } from "./adapt-request.js";
 import { IResponse } from "../interfaces/response.interface.js";
 
-export default function makeCallback(controller: Function) {
+export function makeCallback(controller: Function) {
     return async (req: Request, res: Response) => {
         const httpRequest = adaptRequest(req);
         try {
