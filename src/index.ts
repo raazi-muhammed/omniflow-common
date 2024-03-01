@@ -5,3 +5,4 @@ export * from "./lib/express-response";
 export * from "./lib/load-env";
 
 export * from "./interfaces/response.interface";
+export * from "./middleware/index";
