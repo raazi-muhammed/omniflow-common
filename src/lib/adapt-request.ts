@@ -1,21 +1,5 @@
 import { Request } from "express";
 
-type UserType = {
-    _id?: string;
-    email: string;
-    name: string;
-    username: string;
-    password: string;
-};
-
-declare global {
-    namespace Express {
-        interface Request {
-            currentUser?: UserType;
-        }
-    }
-}
-
 export function adaptRequest(req: Request) {
     return Object.freeze({
         path: req.path,
@@ -25,7 +9,6 @@ export function adaptRequest(req: Request) {
         body: req.body,
         headers: req.headers,
         cookies: req.cookies,
-        currentUser: req.currentUser,
     });
 }
 
