@@ -31,5 +31,3 @@ export default function buildVerifyUserMiddleware({
         }
     };
 }
-
-export type IVerifyMiddleware = ReturnType<typeof buildVerifyUserMiddleware>;
