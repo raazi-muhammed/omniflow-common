@@ -1,4 +1,4 @@
-import { IUser } from "./entity.interface.js";
+import { IUser } from "../lib/token";
 
 type IToken = {
     sign: (data: IUser) => string;
