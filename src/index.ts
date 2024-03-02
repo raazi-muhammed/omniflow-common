@@ -6,4 +6,5 @@ export * from "./lib/load-env";
 export * from "./lib/token";
 
 export * from "./interfaces/response.interface";
+export * from "./interfaces/token.interface";
 export * from "./middleware/index";

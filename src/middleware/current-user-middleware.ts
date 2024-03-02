@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IRequest, adaptRequest } from "../lib/adapt-request";
-import IToken from "../interfaces/token.interface";
+import { IToken } from "../interfaces/token.interface";
 import { IUser } from "../interfaces/entity.interface";
 
 export default function buildVerifyUserMiddleware({
