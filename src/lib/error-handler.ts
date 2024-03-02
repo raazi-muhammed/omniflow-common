@@ -48,7 +48,7 @@ export class UnauthorizedError extends ErrorHandler {
     }
 }
 
-export class UserNotUnauthorizedError extends ErrorHandler {
+export class UserUnauthorizedError extends ErrorHandler {
     constructor(message: string = "User not Unauthorized") {
         super(message, 401);
     }
