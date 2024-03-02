@@ -25,6 +25,7 @@ export default function buildVerifyUserMiddleware({
             email: "hoas",
             password: "hoo",
         };
+        req.body.currentUser = decodedTokenData;
 
         next();
     };
