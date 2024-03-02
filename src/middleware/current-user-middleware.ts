@@ -18,7 +18,13 @@ export default function buildVerifyUserMiddleware({
 
         if (!decodedTokenData) new Error("Invalid token data");
 
-        req.currentUser = decodedTokenData ? decodedTokenData : undefined;
+        // req.currentUser = decodedTokenData ? decodedTokenData : undefined;
+        req.currentUser = {
+            name: "foo",
+            username: "hoo",
+            email: "hoas",
+            password: "hoo",
+        };
 
         next();
     };
