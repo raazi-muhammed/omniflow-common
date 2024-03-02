@@ -14,6 +14,8 @@ export function makeCallback(controller: Function) {
                 data: response.data,
             });
         } catch (error) {
+            console.log("Error caught by make callback:", error);
+
             if (error instanceof ErrorHandler) {
                 res.status(error.statusCode).json({
                     success: false,
