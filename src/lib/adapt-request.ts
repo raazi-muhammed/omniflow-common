@@ -11,7 +11,7 @@ export function adaptRequest(req: CustomRequest<IUser>) {
         body: req.body,
         headers: req.headers,
         cookies: req.cookies,
-        currentUser: req?.currentUser,
+        currentUser: req.currentUser,
     };
 }
 
