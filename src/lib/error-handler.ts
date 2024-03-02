@@ -24,6 +24,12 @@ export class InternalServerError extends ErrorHandler {
     }
 }
 
+export class AnErrorOccurredError extends ErrorHandler {
+    constructor(message: string = "An error occurred") {
+        super(message, 500);
+    }
+}
+
 export class NotFoundError extends ErrorHandler {
     constructor(message: string = "Not found") {
         super(message, 404);
