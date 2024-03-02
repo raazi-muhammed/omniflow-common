@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { adaptRequest } from "../lib/adapt-request";
+import { IRequest, adaptRequest } from "../lib/adapt-request";
 import IToken from "../interfaces/token.interface";
 
 export default function buildVerifyUserMiddleware({
@@ -8,7 +8,7 @@ export default function buildVerifyUserMiddleware({
     token: IToken;
 }) {
     return async (expressReq: Request, res: Response, next: NextFunction) => {
-        const req = adaptRequest(expressReq);
+        const req: IRequest = adaptRequest(expressReq);
 
         const tokenData = `Bearer ${req.cookies["__omniflow-user-token"]}`;
 
@@ -18,7 +18,7 @@ export default function buildVerifyUserMiddleware({
 
         if (!decodedTokenData) new Error("Invalid token data");
 
-        req.body.currentUser = decodedTokenData;
+        req.currentUser = decodedTokenData ? decodedTokenData : undefined;
 
         next();
     };
