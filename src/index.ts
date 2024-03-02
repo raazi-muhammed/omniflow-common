@@ -4,6 +4,7 @@ export * from "./lib/express-callback";
 export * from "./lib/express-response";
 export * from "./lib/load-env";
 export * from "./lib/token";
+export * from "./lib/error-handler";
 
 export * from "./interfaces/response.interface";
 export * from "./interfaces/token.interface";
