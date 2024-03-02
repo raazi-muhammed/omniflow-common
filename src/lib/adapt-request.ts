@@ -1,8 +1,8 @@
 import { Request } from "express";
-import { IUser } from "../interfaces/entity.interface";
+import { IProject, IUser } from "../interfaces/entity.interface";
 
-type CustomRequest<T> = Request & { currentUser?: T };
-export function adaptRequest(req: CustomRequest<IUser>) {
+type CustomRequest<T, Y> = Request & { currentUser?: T; currentProject?: Y };
+export function adaptRequest(req: CustomRequest<IUser, IProject>) {
     return {
         path: req.path,
         method: req.method,
@@ -12,6 +12,7 @@ export function adaptRequest(req: CustomRequest<IUser>) {
         headers: req.headers,
         cookies: req.cookies,
         currentUser: req.currentUser,
+        currentProject: req.currentProject,
     };
 }
 
