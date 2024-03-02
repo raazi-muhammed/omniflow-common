@@ -10,5 +10,5 @@ export type IVerifyUserMiddleware = ReturnType<
 >;
 
 export type IVerifyProjectMiddleware = ReturnType<
-    typeof verifyProjectMiddleware
+    typeof buildVerifyProjectMiddleware
 >;
