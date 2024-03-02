@@ -36,8 +36,20 @@ export class NotFoundError extends ErrorHandler {
     }
 }
 
+export class UserNotFoundError extends ErrorHandler {
+    constructor(message: string = "User not found") {
+        super(message, 404);
+    }
+}
+
 export class UnauthorizedError extends ErrorHandler {
     constructor(message: string = "Unauthorized") {
+        super(message, 401);
+    }
+}
+
+export class UserNotUnauthorizedError extends ErrorHandler {
+    constructor(message: string = "User not Unauthorized") {
         super(message, 401);
     }
 }
