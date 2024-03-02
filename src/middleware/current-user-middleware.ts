@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { IRequest, adaptRequest } from "../lib/adapt-request";
 import IToken from "../interfaces/token.interface";
+import { IUser } from "../interfaces/entity.interface";
 
 export default function buildVerifyUserMiddleware({
     token,
 }: {
-    token: IToken;
+    token: IToken<IUser>;
 }) {
     return async (expressReq: Request, res: Response, next: NextFunction) => {
         const req: IRequest = adaptRequest(expressReq);
@@ -22,7 +23,6 @@ export default function buildVerifyUserMiddleware({
         expressReq.currentUser = decodedTokenData
             ? decodedTokenData
             : undefined;
-        req.body.currentUser = decodedTokenData;
 
         next();
     };

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { IUser } from "./token";
+import { IUser } from "../interfaces/entity.interface";
 
 type CustomRequest<T> = Request & { currentUser?: T };
 export function adaptRequest(req: CustomRequest<IUser>) {

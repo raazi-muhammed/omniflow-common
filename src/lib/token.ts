@@ -1,37 +1,28 @@
 import jwt from "jsonwebtoken";
 
-export interface IUser {
-    _id?: string;
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-    avatar?: string;
-}
-
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-export function sign(data: IUser) {
+function sign(data: Object) {
     if (!ACCESS_TOKEN_SECRET) throw new Error("No salt found for jwt");
 
     const jsonData = JSON.parse(JSON.stringify(data));
     return jwt.sign(jsonData, ACCESS_TOKEN_SECRET);
 }
 
-export async function verify(token: string) {
+async function verify<T>(token: string): Promise<T | null> {
     if (!ACCESS_TOKEN_SECRET) throw new Error("No salt found for jwt");
 
     const tokenData = token.split(" ")[1];
 
-    return new Promise<IUser | null>((resolve) => {
+    return new Promise<T | null>((resolve) => {
         jwt.verify(tokenData, ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) resolve(null);
-            else resolve(user as IUser);
+            else resolve(user as T);
         });
     });
 }
 
-export function validate(auth: string) {
+function validate(auth: string) {
     if (!auth) throw new Error("No token found");
 
     const token = auth.split(" ")[1];
@@ -39,7 +30,7 @@ export function validate(auth: string) {
     return true;
 }
 
-export default Object.freeze({
+export const token = Object.freeze({
     sign,
     verify,
     validate,
