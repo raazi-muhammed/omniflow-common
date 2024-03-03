@@ -1,11 +1,10 @@
 import { Request } from "express";
 import { IProject, IUser } from "../interfaces/entity.interface";
-import { File } from "buffer";
 
 type CustomRequest<T, Y> = Request & {
     currentUser?: T;
     currentProject?: Y;
-    file: File;
+    file: any;
 };
 export function adaptRequest(req: CustomRequest<IUser, IProject>) {
     return {
