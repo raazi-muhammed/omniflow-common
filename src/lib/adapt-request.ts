@@ -1,7 +1,12 @@
 import { Request } from "express";
 import { IProject, IUser } from "../interfaces/entity.interface";
+import { File } from "buffer";
 
-type CustomRequest<T, Y> = Request & { currentUser?: T; currentProject?: Y };
+type CustomRequest<T, Y> = Request & {
+    currentUser?: T;
+    currentProject?: Y;
+    file: File;
+};
 export function adaptRequest(req: CustomRequest<IUser, IProject>) {
     return {
         path: req.path,
@@ -13,6 +18,7 @@ export function adaptRequest(req: CustomRequest<IUser, IProject>) {
         cookies: req.cookies,
         currentUser: req.currentUser,
         currentProject: req.currentProject,
+        file: req.file,
     };
 }
 
