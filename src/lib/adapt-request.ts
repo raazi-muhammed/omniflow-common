@@ -1,12 +1,12 @@
 import { Request } from "express";
 import { IProject, IUser } from "../interfaces/entity.interface";
 
-type CustomRequest<T, Y> = Request & {
+type CustomRequest<T, Y, K> = Request & {
     currentUser?: T;
     currentProject?: Y;
-    file: any;
+    file: K;
 };
-export function adaptRequest(req: CustomRequest<IUser, IProject>) {
+export function adaptRequest(req: CustomRequest<IUser, IProject, any>) {
     return {
         path: req.path,
         method: req.method,
