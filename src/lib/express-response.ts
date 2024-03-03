@@ -1,6 +1,6 @@
 import { IResponse } from "../interfaces/response.interface.js";
 
-export class ReposeCreator {
+export class ResponseCreator {
     private data?: Object | string;
     private statusCode: number = 200;
     private headers?: Object;
