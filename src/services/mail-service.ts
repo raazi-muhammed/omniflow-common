@@ -1,14 +1,4 @@
 import { createTransport } from "nodemailer";
-import { loadEnv } from "../lib/load-env";
-
-const { SMPT_HOST, SMPT_PORT, SMPT_SERVICE, SMPT_MAIL, SMPT_PASSWORD } =
-    loadEnv([
-        "SMPT_HOST",
-        "SMPT_PORT",
-        "SMPT_SERVICE",
-        "SMPT_MAIL",
-        "SMPT_PASSWORD",
-    ]);
 
 export const sendMail = async (options: {
     email: string;
@@ -18,17 +8,17 @@ export const sendMail = async (options: {
 }) => {
     const transporter = createTransport({
         // @ts-ignore
-        host: SMPT_HOST,
-        port: SMPT_PORT,
-        service: SMPT_SERVICE,
+        host: process.env.SMPT_HOST,
+        port: process.env.SMPT_PORT,
+        service: process.env.SMPT_SERVICE,
         secure: true,
         auth: {
-            user: SMPT_MAIL,
-            pass: SMPT_PASSWORD,
+            user: process.env.SMPT_MAIL,
+            pass: process.env.SMPT_PASSWORD,
         },
     });
     const mailOptions = {
-        from: SMPT_MAIL,
+        from: process.env.SMPT_MAIL,
         to: options.email,
         subject: options.subject,
         text: options.message,
