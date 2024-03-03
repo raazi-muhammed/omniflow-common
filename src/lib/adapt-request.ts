@@ -4,7 +4,7 @@ import { IProject, IUser } from "../interfaces/entity.interface";
 type CustomRequest<T, Y, K> = Request & {
     currentUser?: T;
     currentProject?: Y;
-    file: K;
+    file?: K;
 };
 export function adaptRequest(req: CustomRequest<IUser, IProject, any>) {
     return {
