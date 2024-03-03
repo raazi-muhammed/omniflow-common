@@ -42,6 +42,12 @@ export class UserNotFoundError extends ErrorHandler {
     }
 }
 
+export class ProjectNotFoundError extends ErrorHandler {
+    constructor(message: string = "Project not found") {
+        super(message, 404);
+    }
+}
+
 export class UnauthorizedError extends ErrorHandler {
     constructor(message: string = "Unauthorized") {
         super(message, 401);
@@ -50,6 +56,12 @@ export class UnauthorizedError extends ErrorHandler {
 
 export class UserUnauthorizedError extends ErrorHandler {
     constructor(message: string = "User not Unauthorized") {
+        super(message, 401);
+    }
+}
+
+export class ProjectUnauthorizedError extends ErrorHandler {
+    constructor(message: string = "Project not Unauthorized") {
         super(message, 401);
     }
 }
