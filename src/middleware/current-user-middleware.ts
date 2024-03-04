@@ -9,21 +9,25 @@ export default function buildVerifyUserMiddleware({
     token: IToken<IUser>;
 }) {
     return async (expressReq: Request, res: Response, next: NextFunction) => {
-        const req: IRequest = adaptRequest(expressReq);
+        try {
+            const req: IRequest = adaptRequest(expressReq);
 
-        const tokenData = `Bearer ${req.cookies["__omniflow-user-token"]}`;
+            const tokenData = `Bearer ${req.cookies["__omniflow-user-token"]}`;
 
-        token.validate(tokenData);
+            token.validate(tokenData);
 
-        const decodedTokenData = await token.verify(tokenData);
+            const decodedTokenData = await token.verify(tokenData);
 
-        if (!decodedTokenData) new Error("Invalid token data");
+            if (!decodedTokenData) new Error("Invalid token data");
 
-        // @ts-ignore
-        expressReq.currentUser = decodedTokenData
-            ? decodedTokenData
-            : undefined;
+            // @ts-ignore
+            expressReq.currentUser = decodedTokenData
+                ? decodedTokenData
+                : undefined;
 
-        next();
+            next();
+        } catch (error) {
+            next(error);
+        }
     };
 }

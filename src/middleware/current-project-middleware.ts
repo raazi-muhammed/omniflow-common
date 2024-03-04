@@ -9,24 +9,26 @@ export default function buildVerifyProjectMiddleware({
     token: IToken<IProject>;
 }) {
     return async (expressReq: Request, res: Response, next: NextFunction) => {
-        const req: IRequest = adaptRequest(expressReq);
+        try {
+            const req: IRequest = adaptRequest(expressReq);
 
-        const tokenData = `Bearer ${req.cookies["__omniflow-project-token"]}`;
-        if (!tokenData) throw new Error("Not token found");
+            const tokenData = `Bearer ${req.cookies["__omniflow-project-token"]}`;
+            if (!tokenData) throw new Error("Not token found");
 
-        token.validate(tokenData);
+            token.validate(tokenData);
 
-        next(new Error("Testing"));
+            const decodedTokenData = await token.verify(tokenData);
 
-        const decodedTokenData = await token.verify(tokenData);
+            if (!decodedTokenData) throw new Error("Invalid token data");
 
-        if (!decodedTokenData) throw new Error("Invalid token data");
+            // @ts-ignore
+            expressReq.currentProject = decodedTokenData
+                ? decodedTokenData
+                : undefined;
 
-        // @ts-ignore
-        expressReq.currentProject = decodedTokenData
-            ? decodedTokenData
-            : undefined;
-
-        next();
+            next();
+        } catch (error) {
+            next(error);
+        }
     };
 }
