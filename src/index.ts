@@ -10,3 +10,5 @@ export * from "./interfaces/response.interface";
 export * from "./interfaces/token.interface";
 export * from "./middleware/index";
 export * from "./services/mail-service";
+
+export * from "./middleware/error-handling-middleware";
