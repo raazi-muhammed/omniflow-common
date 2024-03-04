@@ -16,7 +16,7 @@ export default function buildVerifyProjectMiddleware({
 
         token.validate(tokenData);
 
-        throw new Error("Testing");
+        next(new Error("Testing"));
 
         const decodedTokenData = await token.verify(tokenData);
 
