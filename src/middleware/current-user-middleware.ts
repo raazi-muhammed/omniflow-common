@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { IRequest, adaptRequest } from "../lib/adapt-request";
 import { IToken } from "../interfaces/token.interface";
 import { IUser } from "../interfaces/entity.interface";
+import { NotFoundError } from "../lib/error-handler";
 
 export default function buildVerifyUserMiddleware({
     token,
@@ -12,7 +13,8 @@ export default function buildVerifyUserMiddleware({
         try {
             const req: IRequest = adaptRequest(expressReq);
 
-            const tokenData = `Bearer ${req.cookies["__omniflow-user-token"]}`;
+            const tokenData = req.headers.authorization;
+            if (!tokenData) throw new NotFoundError("Token not found");
 
             token.validate(tokenData);
 
