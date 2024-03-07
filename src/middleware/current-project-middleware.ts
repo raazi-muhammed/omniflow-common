@@ -12,8 +12,10 @@ export default function buildVerifyProjectMiddleware({
         try {
             const req: IRequest = adaptRequest(expressReq);
 
-            const tokenData = `Bearer ${req.cookies["__omniflow-project-token"]}`;
-            if (!tokenData) throw new Error("Not token found");
+            const tokenData = req.headers.project;
+            if (!tokenData || typeof tokenData !== "string") {
+                throw new Error("Not token found");
+            }
 
             token.validate(tokenData);
 
