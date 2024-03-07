@@ -14,11 +14,16 @@ export default function buildVerifyUserMiddleware({
             const req: IRequest = adaptRequest(expressReq);
 
             const tokenData = req.headers.authorization;
+            console.log(req.headers);
+            console.log(tokenData);
+
             if (!tokenData) throw new NotFoundError("Token not found");
 
             token.validate(tokenData);
 
             const decodedTokenData = await token.verify(tokenData);
+
+            console.log(decodedTokenData);
 
             if (!decodedTokenData) new Error("Invalid token data");
 
