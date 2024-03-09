@@ -1,5 +1,5 @@
 export interface IProject {
-    _id?: string;
+    id?: string;
     title: string;
     description: string;
     priority: number;
@@ -9,7 +9,7 @@ export interface IProject {
     members: string[];
 }
 export interface IUser {
-    _id?: string;
+    id?: string;
     name: string;
     username: string;
     email: string;
