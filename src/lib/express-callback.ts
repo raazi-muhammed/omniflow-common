@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { adaptRequest } from "./adapt-request.js";
 import { IResponse } from "../interfaces/response.interface.js";
 import { ErrorHandler } from "./error-handler.js";
+import { logger } from "./logger.js";
 
 export function makeCallback(controller: Function) {
     return async (req: Request, res: Response) => {
@@ -14,7 +15,7 @@ export function makeCallback(controller: Function) {
                 data: response.data,
             });
         } catch (error) {
-            console.log("Error caught by make callback:", error);
+            logger.error("Error caught by make callback:", error);
 
             if (error instanceof ErrorHandler) {
                 res.status(error.statusCode).json({
