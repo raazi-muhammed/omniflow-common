@@ -14,7 +14,7 @@ addColors({
 });
 
 export const logger = winston.createLogger({
-    level: "http",
+    level: "silly",
     format: combine(
         colorize(),
         label({ label: SERVER_NAME }),
