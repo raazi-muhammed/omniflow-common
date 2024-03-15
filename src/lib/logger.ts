@@ -1,5 +1,6 @@
 import winston from "winston";
 import { loadEnv } from "./load-env";
+import { addColors } from "winston/lib/winston/config";
 const { combine, printf, timestamp, label, colorize } = winston.format;
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
@@ -7,6 +8,10 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 });
 
 const { SERVER_NAME } = loadEnv(["SERVER_NAME"]);
+
+addColors({
+    http: "italic gray",
+});
 
 export const logger = winston.createLogger({
     level: "http",
