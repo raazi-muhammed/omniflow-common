@@ -1,6 +1,8 @@
 import winston from "winston";
 import { loadEnv } from "./load-env";
 import { addColors } from "winston/lib/winston/config";
+import LokiTransport from "winston-loki";
+
 const { combine, printf, timestamp, label, colorize } = winston.format;
 
 const myFormat = printf(({ level, message, label, timestamp }) => {
@@ -21,7 +23,11 @@ export const logger = winston.createLogger({
         timestamp({ format: "HH:mm:ss" }),
         myFormat
     ),
-    transports: [],
+    transports: [
+        new LokiTransport({
+            host: "http://127.0.0.1:3100",
+        }),
+    ],
 });
 
 if (process.env.NODE_ENV !== "production") {
