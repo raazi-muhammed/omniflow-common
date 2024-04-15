@@ -9,7 +9,7 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
     return `${timestamp} [${label}] ${level}: ${message}`;
 });
 
-const { SERVER_NAME } = loadEnv(["SERVER_NAME"]);
+const { SERVER_NAME, LOGGER_URL } = loadEnv(["SERVER_NAME", "LOGGER_URL"]);
 
 addColors({
     http: "italic gray",
@@ -25,7 +25,7 @@ export const logger = winston.createLogger({
     ),
     transports: [
         new LokiTransport({
-            host: "http://127.0.0.1:3100",
+            host: LOGGER_URL,
         }),
     ],
 });
